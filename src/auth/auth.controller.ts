@@ -38,6 +38,9 @@ export class AuthController {
     return this.authService.signUp(signupDto);
   }
 
+  @Roles('user', 'admin')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(RolesGuard)
   @UseGuards(AuthGuard)
   @Get('me')
   getUserInfo(@Request() req: RequestWithUser) {
